@@ -172,3 +172,27 @@ body {
   30% { opacity: 0.6; }
   100% { opacity: 0; transform: translateY(-10px) scaleX(1.4); }
 }
+
+/* Confetti burst, used by the curiosity-game completion modal */
+.confetti-piece {
+  position: absolute;
+  border-radius: 1px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  animation: confetti-burst 900ms ease-out forwards;
+}
+@keyframes confetti-burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--confetti-dx), var(--confetti-dy)) rotate(220deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece {
+    display: none;
+  }
+}

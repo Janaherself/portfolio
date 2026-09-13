@@ -4,6 +4,7 @@ import { personal, socialLinks } from '../../data/personal';
 import type { SocialLink } from '../../data/types';
 import { Section } from '../ui/Section';
 import { GithubIcon, LinkedinIcon } from '../ui/BrandIcons';
+import { CoffeePotMystery } from '../curiosity/CoffeePotMystery';
 
 const ICONS: Record<SocialLink['icon'], ComponentType<SVGProps<SVGSVGElement>>> = {
   github: GithubIcon,
@@ -11,34 +12,6 @@ const ICONS: Record<SocialLink['icon'], ComponentType<SVGProps<SVGSVGElement>>> 
   'file-text': FileText,
   mail: Mail,
 };
-
-function CoffeeCup() {
-  return (
-    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-      <path
-        d="M20 28h28l-2.5 24a6 6 0 0 1-6 5.5H28.5a6 6 0 0 1-6-5.5L20 28Z"
-        stroke="var(--accent)"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-      />
-      <path d="M48 32h4a6 6 0 0 1 0 12h-3" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" />
-      <path
-        className="steam"
-        d="M27 20c0-3 3-3 3-6s-2-4-2-4"
-        stroke="var(--accent-2)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        className="steam steam-delay"
-        d="M36 20c0-3 3-3 3-6s-2-4-2-4"
-        stroke="var(--accent-2)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export function About() {
   const availableLinks = socialLinks.filter((link) => link.url);
@@ -88,11 +61,11 @@ export function About() {
           )}
         </div>
 
-        <div className="flex flex-col items-center gap-2 justify-self-center rounded-xl border p-6" style={{ borderColor: 'var(--border)', background: 'var(--bg-raised)' }}>
-          <CoffeeCup />
-          <p className="font-mono text-xs" style={{ color: 'var(--ink-faint)' }}>
-            fuel level: sufficient
-          </p>
+        <div
+          className="relative flex flex-col items-center gap-2 justify-self-center rounded-xl border p-6"
+          style={{ borderColor: 'var(--border)', background: 'var(--bg-raised)' }}
+        >
+          <CoffeePotMystery />
         </div>
       </div>
     </Section>

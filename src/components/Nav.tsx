@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Coffee, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ui/ThemeToggle';
+import { CuriosityMeter } from './curiosity/CuriosityMeter';
+import { MysteryPopover } from './curiosity/MysteryPopover';
+import { getMystery } from '../data/mysteries';
+import { useCuriosityGame } from '../hooks/useCuriosityGame';
 import { personal } from '../data/personal';
 
 const NAV_LINKS = [
@@ -9,6 +13,55 @@ const NAV_LINKS = [
   { href: '#approach', label: 'Approach' },
   { href: '#about', label: 'About' },
 ];
+
+const LOGO_MYSTERY_ID = 'nav-logo';
+const LOGO_CLICK_WINDOW_MS = 2000;
+const LOGO_CLICKS_NEEDED = 3;
+
+/**
+ * The logo still behaves like a normal "back to top" link on every click.
+ * Click it three times within two seconds, though, and it also reveals a
+ * hidden curiosity — a small "extraordinary" hiding spot that doesn't
+ * interfere with its everyday job.
+ */
+function Logo() {
+  const { isFound, reveal } = useCuriosityGame();
+  const [open, setOpen] = useState(false);
+  const clickCountRef = useRef(0);
+  const resetTimeoutRef = useRef<number | undefined>(undefined);
+  const mystery = getMystery(LOGO_MYSTERY_ID);
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    clickCountRef.current += 1;
+    window.clearTimeout(resetTimeoutRef.current);
+    resetTimeoutRef.current = window.setTimeout(() => {
+      clickCountRef.current = 0;
+    }, LOGO_CLICK_WINDOW_MS);
+
+    if (clickCountRef.current >= LOGO_CLICKS_NEEDED) {
+      clickCountRef.current = 0;
+      setOpen(true);
+      if (!isFound(LOGO_MYSTERY_ID)) {
+        reveal(LOGO_MYSTERY_ID, event.currentTarget.getBoundingClientRect());
+      }
+    }
+  };
+
+  return (
+    <span className="relative inline-flex">
+      <a
+        href="#top"
+        onClick={handleClick}
+        className="flex items-center gap-2 font-display text-lg font-semibold"
+        aria-label={`${personal.name} — back to top`}
+      >
+        <Coffee className="h-5 w-5" style={{ color: 'var(--accent)' }} aria-hidden="true" />
+        {personal.name}
+      </a>
+      <MysteryPopover open={open} onClose={() => setOpen(false)} text={mystery.note} align="start" />
+    </span>
+  );
+}
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -28,14 +81,7 @@ export function Nav() {
       style={{ borderColor: 'var(--border)', background: 'color-mix(in srgb, var(--bg) 85%, transparent)' }}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a
-          href="#top"
-          className="flex items-center gap-2 font-display text-lg font-semibold"
-          aria-label={`${personal.name} — back to top`}
-        >
-          <Coffee className="h-5 w-5" style={{ color: 'var(--accent)' }} aria-hidden="true" />
-          {personal.name}
-        </a>
+        <Logo />
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
@@ -51,6 +97,7 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <CuriosityMeter />
           <ThemeToggle />
           <button
             type="button"

@@ -25,11 +25,15 @@ export const personal = {
   /** Used in meta tags and footer. */
   shortBio:
     "Software engineer who reads the error message twice, asks why, and then fixes the actual problem.",
+
+  /** Shown as the "quick call" link in the curiosity-game completion modal.
+   *  Leave empty to fall back to plain, non-linked text instead of a dead link. */
+  calendlyUrl: 'https://calendly.com/jana-abusaa/coffee-chat-with-jana',
 } as const;
 
 export const socialLinks: SocialLink[] = [
-  { label: 'GitHub', url: '', icon: 'github' },
-  { label: 'LinkedIn', url: '', icon: 'linkedin' },
-  { label: 'CV / Résumé', url: '', icon: 'file-text' },
-  { label: 'Email', url: '', icon: 'mail' },
+  { label: 'GitHub', url: 'https://github.com/Janaherself', icon: 'github' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/jana-abusaa/', icon: 'linkedin' },
+  { label: 'CV / Résumé', url: 'cv', icon: 'file-text' },
+  { label: 'Email', url: 'mailto:jana.abusaa@gmail.com', icon: 'mail' },
 ];

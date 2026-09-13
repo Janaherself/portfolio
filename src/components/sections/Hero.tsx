@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowDown, Coffee } from 'lucide-react';
 import { personal } from '../../data/personal';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { MysteryTrigger } from '../curiosity/MysteryTrigger';
 
 const LOG_LINES = [
   { prefix: '$', text: 'why does this break every third request?' },
@@ -107,7 +108,9 @@ export function Hero() {
       </div>
 
       <div className="flex-1">
-        <TerminalLog />
+        <MysteryTrigger id="hero-terminal" label="This terminal has more to say — click it" className="w-full">
+          <TerminalLog />
+        </MysteryTrigger>
       </div>
     </section>
   );

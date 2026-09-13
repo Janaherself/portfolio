@@ -1,5 +1,8 @@
 import { skillGroups, engineeringApproach } from '../../data/skills';
 import { Section } from '../ui/Section';
+import { MysteryTrigger } from '../curiosity/MysteryTrigger';
+
+const MYSTERY_SKILL = 'REST API design';
 
 export function Skills() {
   return (
@@ -21,15 +24,28 @@ export function Skills() {
               {group.blurb}
             </p>
             <ul className="flex flex-wrap gap-2">
-              {group.items.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-full border px-2.5 py-1 text-xs font-medium"
-                  style={{ borderColor: 'var(--border-strong)', color: 'var(--ink-soft)' }}
-                >
-                  {item}
-                </li>
-              ))}
+              {group.items.map((item) =>
+                item === MYSTERY_SKILL ? (
+                  <li key={item}>
+                    <MysteryTrigger id="skill-chip" label={`${item} — this one has a story`}>
+                      <span
+                        className="rounded-full border px-2.5 py-1 text-xs font-medium"
+                        style={{ borderColor: 'var(--border-strong)', color: 'var(--ink-soft)' }}
+                      >
+                        {item}
+                      </span>
+                    </MysteryTrigger>
+                  </li>
+                ) : (
+                  <li
+                    key={item}
+                    className="rounded-full border px-2.5 py-1 text-xs font-medium"
+                    style={{ borderColor: 'var(--border-strong)', color: 'var(--ink-soft)' }}
+                  >
+                    {item}
+                  </li>
+                ),
+              )}
             </ul>
           </div>
         ))}
