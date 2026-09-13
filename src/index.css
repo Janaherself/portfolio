@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* Two intentionally-designed themes, not a simple inversion.          */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+
+  --radius-sm: 0.35rem;
+  --radius-md: 0.6rem;
+  --radius-lg: 1rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light theme: warm paper, espresso ink, one confident amber accent. */
+[data-theme="light"] {
+  --bg: #faf6f0;
+  --bg-raised: #ffffff;
+  --bg-sunken: #f1eade;
+  --ink: #241d16;
+  --ink-soft: #5c5147;
+  --ink-faint: #6a5c4c;
+  --border: #e4d9c8;
+  --border-strong: #cdbda3;
+  --accent: #b5540f;
+  --accent-strong: #8a3d09;
+  --accent-ink: #ffffff;
+  --accent-soft: #f4e2cf;
+  --accent-2: #2f6f62;
+  --accent-2-soft: #dcece7;
+  --code-bg: #f1e7d8;
+  --shadow-color: 30 20% 20%;
+  --focus-ring: #b5540f;
+}
+
+/* Dark theme: deep roasted coffee, not just "invert light". */
+[data-theme="dark"] {
+  --bg: #17130f;
+  --bg-raised: #1f1a14;
+  --bg-sunken: #120f0b;
+  --ink: #f3eadc;
+  --ink-soft: #cabca9;
+  --ink-faint: #968975;
+  --border: #33291d;
+  --border-strong: #4a3c29;
+  --accent: #e59245;
+  --accent-strong: #f4ac6c;
+  --accent-ink: #17130f;
+  --accent-soft: #2e2213;
+  --accent-2: #6fbba8;
+  --accent-2-soft: #1c2c27;
+  --code-bg: #1c1610;
+  --shadow-color: 0 0% 0%;
+  --focus-ring: #e59245;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* Visible, consistent focus ring everywhere, incl. keyboard-only. */
+:focus-visible {
+  outline: 2.5px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -3rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  z-index: 100;
+  transition: top 0.2s var(--ease-out);
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Custom scrollbar, subtle */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Underline-draw link style used across body copy */
+.ink-link {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.25s var(--ease-out);
+  padding-bottom: 1px;
+}
+.ink-link:hover,
+.ink-link:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Curiosity mark: small "?" affordance used throughout the site */
+.curiosity-dot {
+  animation: curiosity-pulse 2.4s ease-in-out infinite;
+}
+@keyframes curiosity-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Steam wisp for the coffee cup detail */
+.steam {
+  animation: steam-rise 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.steam-delay {
+  animation-delay: 0.9s;
+}
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(0) scaleX(1); }
+  30% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-10px) scaleX(1.4); }
+}
