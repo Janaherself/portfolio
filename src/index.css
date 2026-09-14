@@ -59,6 +59,18 @@
   --focus-ring: #e59245;
 }
 
+/* Native <button> elements default to cursor: default (arrow) in most
+   browsers, unlike <a> tags which get pointer automatically. Every
+   interactive control on this site is a real <button>, so fix it globally
+   once instead of repeating `cursor-pointer` on every single one. */
+button:not(:disabled),
+[role='button']:not(:disabled) {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
 * {
   border-color: var(--border);
 }
@@ -176,19 +188,25 @@ body {
 /* Confetti burst, used by the curiosity-game completion modal */
 .confetti-piece {
   position: absolute;
-  border-radius: 1px;
   opacity: 0;
   transform: translate(-50%, -50%);
-  animation: confetti-burst 900ms ease-out forwards;
+  animation-name: confetti-burst;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  animation-fill-mode: forwards;
 }
 @keyframes confetti-burst {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(1);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(var(--confetti-dx), var(--confetti-dy)) rotate(var(--confetti-rot)) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) translate(var(--confetti-dx), var(--confetti-dy)) rotate(220deg);
+    transform: translate(-50%, -50%) translate(var(--confetti-dx-end), var(--confetti-dy-end))
+      rotate(calc(var(--confetti-rot) * 1.4)) scale(0.6);
   }
 }
 @media (prefers-reduced-motion: reduce) {

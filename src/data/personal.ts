@@ -34,6 +34,6 @@ export const personal = {
 export const socialLinks: SocialLink[] = [
   { label: 'GitHub', url: 'https://github.com/Janaherself', icon: 'github' },
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/jana-abusaa/', icon: 'linkedin' },
-  { label: 'CV / Résumé', url: 'cv', icon: 'file-text' },
+  { label: 'CV / Résumé', url: '/cv/JanaAbusaa-SoftwareEngineer.pdf', icon: 'file-text' },
   { label: 'Email', url: 'mailto:jana.abusaa@gmail.com', icon: 'mail' },
 ];

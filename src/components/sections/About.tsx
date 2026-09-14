@@ -35,12 +35,14 @@ export function About() {
             <div className="flex flex-wrap gap-3 pt-4">
               {availableLinks.map((link) => {
                 const Icon = ICONS[link.icon];
+                const opensNewTab = link.icon !== 'mail';
                 return (
                   <a
                     key={link.label}
                     href={link.icon === 'mail' ? `mailto:${link.url}` : link.url}
-                    target={link.icon === 'mail' ? undefined : '_blank'}
-                    rel={link.icon === 'mail' ? undefined : 'noreferrer noopener'}
+                    target={opensNewTab ? '_blank' : undefined}
+                    rel={opensNewTab ? 'noreferrer noopener' : undefined}
+                    aria-label={opensNewTab ? `${link.label} (opens in a new tab)` : link.label}
                     className="inline-flex items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5"
                     style={{ borderColor: 'var(--border-strong)', color: 'var(--ink)' }}
                   >
