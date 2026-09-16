@@ -6,23 +6,23 @@ export interface Mystery {
 export const mysteries: Mystery[] = [
   {
     id: 'coffee-pot',
-    note: 'Hope you brought coffee with you cuz I\'m a HUGE fan ☕🪭',
+    note: 'Hope you brought some coffee. I\'m a HUGE fan ☕🪭',
   },
   {
     id: 'nav-logo',
-    note: 'Jana.',
+    note: 'My browser had 26 tabs open at the time i wrote this (usually even more). This is what I call "fine R&D" 🤓',
   },
   {
     id: 'hero-terminal',
-    note: 'Terminal to me is like the friend you never meant to be friends with but is the closet one to you now 👭',
+    note: 'The terminal and I weren\'t supposed to become this close. And yet, here we are 👭',
   },
   {
     id: 'skill-chip',
-    note: 'REST',
+    note: 'A good API is a conversation between systems. I\'m a fan of both good conversations and systems that work ⛓',
   },
   {
     id: 'footer-mark',
-    note: 'This is exactly how much i care about details!',
+    note: 'You clicked the dot! Of course you did!!! Tiny details are kind of my thing 🧐',
   },
 ];
 

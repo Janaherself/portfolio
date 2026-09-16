@@ -17,7 +17,7 @@ export const personal = {
 
   /** Longer paragraph for the About section. Keep it human, not a résumé. */
   about: [
-    "I'm a software engineer with a backend-leaning brain and a full-stack toolbox. Before I write a line of code, I want to understand why the problem exists in the first place — that's usually the more interesting question anyway.",
+    "I'm a software engineer with a backend-leaning brain and a full-stack toolbox. Before I write a line of code, I want to understand why the problem exists in the first place, that's usually the most interesting question anyway.",
     "I like picking things apart, seeing how they're wired, and then making them a little better. Some of that shows up in production code, some of it shows up in side projects that started as 'huh, that's annoying' and turned into an app.",
     "Also: I run on coffee. Not a personality trait, just a fact.",
   ],
