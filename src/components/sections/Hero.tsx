@@ -11,26 +11,50 @@ const LOG_LINES = [
   { prefix: '$', text: 'status: curious, caffeinated, shipping.' },
 ];
 
-/**
- * Hero's centerpiece: a small typed "terminal log" that plays once,
- * standing in for how Jana actually approaches problems — question,
- * investigation, fix — instead of a static "Hi, I'm Jana" headline.
- * Falls back to the fully-typed text immediately if the user prefers
- * reduced motion.
- */
+const CHAR_DELAY_MS = 30;
+const LINE_PAUSE_MS = 300;
+const START_DELAY_MS = 400;
+
+/** Total characters typed so far, mapped onto which lines are done and how far into the current one. */
+function sliceLines(charsTyped: number) {
+  let remaining = charsTyped;
+  const result: { prefix: string; text: string; done: boolean }[] = [];
+
+  for (const line of LOG_LINES) {
+    if (remaining <= 0) break;
+    const shown = Math.min(remaining, line.text.length);
+    result.push({ prefix: line.prefix, text: line.text.slice(0, shown), done: shown === line.text.length });
+    remaining -= shown;
+  }
+
+  return result;
+}
+
+const TOTAL_CHARS = LOG_LINES.reduce((sum, line) => sum + line.text.length, 0);
+
 function TerminalLog() {
   const reducedMotion = useReducedMotion();
-  const [visibleLines, setVisibleLines] = useState(reducedMotion ? LOG_LINES.length : 0);
+  const [charsTyped, setCharsTyped] = useState(0);
+  const finished = reducedMotion || charsTyped >= TOTAL_CHARS;
 
   useEffect(() => {
-    if (reducedMotion) {
-      setVisibleLines(LOG_LINES.length);
-      return;
+    if (reducedMotion || charsTyped >= TOTAL_CHARS) return;
+
+    let delay = charsTyped === 0 ? START_DELAY_MS : CHAR_DELAY_MS;
+    let consumed = 0;
+    for (const line of LOG_LINES) {
+      consumed += line.text.length;
+      if (charsTyped === consumed) {
+        delay = LINE_PAUSE_MS;
+        break;
+      }
     }
-    if (visibleLines >= LOG_LINES.length) return;
-    const timeout = window.setTimeout(() => setVisibleLines((n) => n + 1), visibleLines === 0 ? 400 : 750);
+
+    const timeout = window.setTimeout(() => setCharsTyped((n) => n + 1), delay);
     return () => window.clearTimeout(timeout);
-  }, [visibleLines, reducedMotion]);
+  }, [charsTyped, reducedMotion]);
+
+  const lines = reducedMotion ? LOG_LINES.map((l) => ({ ...l, done: true })) : sliceLines(charsTyped);
 
   return (
     <div
@@ -44,17 +68,35 @@ function TerminalLog() {
         <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'var(--border-strong)' }} />
         <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'var(--border-strong)' }} />
       </div>
-      <ul className="space-y-2">
-        {LOG_LINES.slice(0, visibleLines).map((line, index) => (
-          <li key={index} className="flex gap-2 leading-relaxed">
-            <span aria-hidden="true" style={{ color: 'var(--accent)' }}>
-              {line.prefix}
-            </span>
-            <span style={{ color: line.prefix === '$' ? 'var(--ink)' : 'var(--ink-soft)' }}>{line.text}</span>
+
+      {/* The full log, read once by assistive tech instead of the animating copy. */}
+      <p className="sr-only">
+        {LOG_LINES.map((line) => `${line.prefix} ${line.text}`).join(' ')}
+      </p>
+
+      {/* Reserve the finished height up front so the hero doesn't reflow while typing. */}
+      <ul
+        aria-hidden="true"
+        className="space-y-2"
+        style={{ minHeight: `calc(${LOG_LINES.length} * 1.625em + ${(LOG_LINES.length - 1) * 0.5}rem)` }}
+      >
+        {lines.map((line, index) => {
+          const isLastRendered = index === lines.length - 1;
+          return (
+            <li key={index} className="flex gap-2 leading-relaxed">
+              <span style={{ color: 'var(--accent)' }}>{line.prefix}</span>
+              <span style={{ color: line.prefix === '$' ? 'var(--ink)' : 'var(--ink-soft)' }}>
+                {line.text}
+                {!finished && isLastRendered && <span className="terminal-caret" />}
+              </span>
+            </li>
+          );
+        })}
+        {/* Caret sits on its own line while waiting for the first character. */}
+        {!finished && lines.length === 0 && (
+          <li className="flex gap-2 leading-relaxed">
+            <span className="terminal-caret" />
           </li>
-        ))}
-        {visibleLines < LOG_LINES.length && (
-          <li aria-hidden="true" className="inline-block h-4 w-2" style={{ background: 'var(--accent)' }} />
         )}
       </ul>
     </div>
