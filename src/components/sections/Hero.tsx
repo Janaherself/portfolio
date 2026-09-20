@@ -5,10 +5,10 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { MysteryTrigger } from '../curiosity/MysteryTrigger';
 
 const LOG_LINES = [
-  { prefix: '$', text: 'why does this break every third request?' },
-  { prefix: '>', text: 'nobody asked. so I did.' },
-  { prefix: '>', text: 'turned out to be a race condition. fixed.' },
-  { prefix: '$', text: 'status: curious, caffeinated, shipping.' },
+  { prefix: '$', text: 'everything worked fine, only a tiny bug annoyed me' },
+  { prefix: '>', text: 'nobody asked me to fix it. I investigated anyway' },
+  { prefix: '>', text: 'learnt something new. fixed it (couldn\'t unsee it)' },
+  { prefix: '$', text: 'status: curious, caffeinated, shippinggg!!' },
 ];
 
 const CHAR_DELAY_MS = 30;
