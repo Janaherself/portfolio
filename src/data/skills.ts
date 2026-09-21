@@ -1,16 +1,11 @@
 import type { SkillGroup } from './types';
 
-/**
- * Skills grouped by how Jana actually knows them — not a wall of logos,
- * and no invented proficiency percentages.
- */
-
 export const skillGroups: SkillGroup[] = [
   {
     track: 'professional',
     title: 'Used on the job',
     blurb: 'Shipped in production, or built for a team that depends on it.',
-    items: ['ASP.NET Core', 'C#', 'React', 'Entity Framework', 'JWT & role-based access', 'Git & GitHub'],
+    items: ['ASP.NET Core', 'Entity Framework', 'TypeScript', 'React', 'Node.js', 'Git & GitHub', 'JWT'],
   },
   {
     track: 'personal-projects',
@@ -21,9 +16,9 @@ export const skillGroups: SkillGroup[] = [
       'Node.js & Express',
       'REST API design',
       'SQL & relational databases',
-      'Angular',
       '.NET 8',
-      'FluentValidation & AutoMapper',
+      'FluentValidation',
+      'AutoMapper',
       'Serilog',
       'Docker & GitHub Actions',
       'Automated testing',
@@ -32,14 +27,14 @@ export const skillGroups: SkillGroup[] = [
   {
     track: 'learning',
     title: 'Actively improving',
-    blurb: "Comfortable, not finished — I'm still deepening these.",
-    items: ['React + TypeScript patterns', 'System design for backend services', 'Data analysis & ML fundamentals'],
+    blurb: "Comfortable, not finished, I'm still sharpening (fighting) these.",
+    items: ['React + TypeScript patterns', 'System design for frontend', 'Data analysis & ML fundamentals', 'Automation'],
   },
 ];
 
 export const engineeringApproach: string[] = [
   'Understand the problem before touching the solution.',
-  "Read the error message twice — the real bug is rarely the first thing it blames.",
+  "Read the error message twice, the real bug is usually in the details.",
   'Ask questions early. It costs a minute now and saves a week later.',
   'Prefer code I can explain over code that just happens to work.',
 ];

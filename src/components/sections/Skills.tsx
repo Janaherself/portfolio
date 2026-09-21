@@ -10,7 +10,7 @@ export function Skills() {
       id="approach"
       eyebrow="How I work"
       title="Skills, honestly labeled"
-      description="Grouped by how I actually know each one — not a wall of logos, and no invented expert badges."
+      description="No skill bingo here. Just the technologies I've actually learned, used, and occasionally fought with, grouped accordingly."
     >
       <div className="grid gap-6 md:grid-cols-3">
         {skillGroups.map((group) => (
