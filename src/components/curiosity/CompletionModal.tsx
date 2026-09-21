@@ -81,10 +81,10 @@ export function CompletionModal() {
         className="relative w-full max-w-md rounded-2xl border p-8 text-center shadow-2xl outline-none"
         style={{ background: 'var(--bg-raised)', borderColor: 'var(--border)' }}
       >
-        {isFullCelebration && !reducedMotion && <Confetti />}
+        {!reducedMotion && <Confetti />}
 
         <h2 id="celebration-heading" className="font-display text-2xl font-semibold sm:text-3xl">
-          Congrats 🎉
+          {isFullCelebration ? 'Congrats 🎉' : 'Congrats again 🎉'}
         </h2>
 
         {isFullCelebration ? (
