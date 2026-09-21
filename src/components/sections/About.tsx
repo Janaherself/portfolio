@@ -21,7 +21,7 @@ export function About() {
       id="about"
       eyebrow="Say hello"
       title="Curious about the rest?"
-      description="Here's the short version of who I am — and how to reach me if you want the longer one."
+      description="Here's the short version of who I am, and how to reach me if you want the longer one."
     >
       <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
         <div className="max-w-2xl space-y-4">
