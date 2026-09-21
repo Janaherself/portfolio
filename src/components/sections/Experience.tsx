@@ -74,10 +74,11 @@ export function Experience() {
     >
       <ol className="relative flex flex-col gap-6">
         <span
-          className="pointer-events-none absolute bottom-2 top-2 w-px start-[11px] sm:start-[15px]"
-          style={{ background: 'var(--border-strong)' }}
+          className="pointer-events-none absolute bottom-2 start-0 top-2 flex w-6 justify-center"
           aria-hidden="true"
-        />
+        >
+          <span className="h-full w-px" style={{ background: 'var(--border-strong)' }} />
+        </span>
         {experience.map((item) => (
           <EmphasisCard key={item.id} item={item} />
         ))}
