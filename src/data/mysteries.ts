@@ -14,7 +14,7 @@ export const mysteries: Mystery[] = [
   },
   {
     id: 'hero-terminal',
-    note: 'The terminal and I weren\'t supposed to become this close. And yet, here we are 👭',
+    note: 'A real internship side quest: I spotted a tiny issue that wasn\'t part of my task. I investigated anyway, learned a completely new concept, and fixed it. Basically, i saw it… and couldn\'t unsee it. 👀',
   },
   {
     id: 'skill-chip',
