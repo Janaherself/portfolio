@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
+import { getMystery, MYSTERY_HINT_ORDER } from '../../data/mysteries';
 import { useCuriosityGame } from '../../hooks/useCuriosityGame';
 
 export function CuriosityMeter() {
-  const { total, foundCount, meterRef, pulseKey, isComplete, hasSeenIntro, dismissIntro, openRecap } =
+  const { total, foundCount, meterRef, pulseKey, isComplete, hasSeenIntro, dismissIntro, openRecap, isFound } =
     useCuriosityGame();
   const [pulsing, setPulsing] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
+  const [hovering, setHovering] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const showHints = hovering || pinned;
 
   useEffect(() => {
     if (pulseKey === 0) return;
@@ -26,6 +30,13 @@ export function CuriosityMeter() {
       return;
     }
     setShowIntro((prev) => !prev);
+  };
+
+  const closeIntro = () => {
+    setShowIntro(false);
+    setPinned(false);
+    setHovering(false);
+    dismissIntro();
   };
 
   return (
@@ -65,17 +76,72 @@ export function CuriosityMeter() {
             There are {total} small mysteries hiding around this site, some obvious, some not. Find all of them
             and I'll have something for you 👀
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              setShowIntro(false);
-              dismissIntro();
-            }}
-            className="mt-3 text-xs font-semibold underline underline-offset-2"
-            style={{ color: 'var(--ink-faint)' }}
-          >
-            got it
-          </button>
+          <p className="mt-2 text-xs" style={{ color: 'var(--ink-faint)' }}>
+            Need help? Find hints down below.
+          </p>
+
+          <div className="mt-3 flex items-center gap-4">
+            <button
+              type="button"
+              onClick={closeIntro}
+              className="text-xs font-semibold underline underline-offset-2"
+              style={{ color: 'var(--ink-faint)' }}
+            >
+              got it
+            </button>
+
+            <span className="relative inline-flex">
+              <button
+                type="button"
+                onMouseEnter={() => setHovering(true)}
+                onMouseLeave={() => setHovering(false)}
+                onFocus={() => setHovering(true)}
+                onBlur={() => setHovering(false)}
+                onClick={() => setPinned((prev) => !prev)}
+                aria-expanded={showHints}
+                className="text-xs font-semibold underline underline-offset-2"
+                style={{ color: 'var(--accent-2)' }}
+              >
+                hints
+              </button>
+
+              {showHints && (
+                <div
+                  role="note"
+                  aria-label="Hints for where each curiosity is hiding"
+                  className="absolute left-1/2 top-full z-10 mt-2 w-72 max-w-[85vw] -translate-x-1/2 rounded-lg border p-4 text-left shadow-xl"
+                  style={{ background: 'var(--bg-raised)', borderColor: 'var(--accent-2)' }}
+                >
+                  <p
+                    className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-wide"
+                    style={{ color: 'var(--accent-2)' }}
+                  >
+                    top of the page to the bottom
+                  </p>
+                  <ol className="space-y-2">
+                    {MYSTERY_HINT_ORDER.map((id, index) => {
+                      const alreadyFound = isFound(id);
+                      return (
+                        <li key={id} className="flex gap-2 text-xs leading-relaxed">
+                          <span className="font-mono" style={{ color: 'var(--ink-faint)' }}>
+                            {index + 1}.
+                          </span>
+                          <span
+                            style={{
+                              color: alreadyFound ? 'var(--ink-faint)' : 'var(--ink-soft)',
+                              textDecoration: alreadyFound ? 'line-through' : 'none',
+                            }}
+                          >
+                            {getMystery(id).hint}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+              )}
+            </span>
+          </div>
         </div>
       )}
     </div>
