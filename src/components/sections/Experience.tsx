@@ -70,7 +70,7 @@ export function Experience() {
       id="experience"
       eyebrow="Where I've worked"
       title="Learning fast, on real codebases"
-      description="Two internships and one earlier detour into data science — each one taught me something I still use."
+      description="Two internships and one earlier detour into data science, each one taught me something I still use."
     >
       <ol className="relative flex flex-col gap-6">
         <span

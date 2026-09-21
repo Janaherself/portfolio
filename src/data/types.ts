@@ -1,12 +1,3 @@
-/**
- * Shared content types.
- *
- * Everything a visitor reads lives in plain data files under `src/data/`.
- * Components only render this data — they don't contain copy themselves.
- * That split means updating a project, a job, or a link never requires
- * touching JSX.
- */
-
 export interface ProjectLink {
   label: string;
   url: string;
@@ -17,16 +8,12 @@ export interface Project {
   name: string;
   tagline: string;
   description: string;
-  /** What Jana specifically explored, built, or owned. */
   contribution: string;
   stack: string[];
   status: 'in-progress' | 'complete';
-  /** Free-text note shown near the status, e.g. "personal project, still evolving". */
   statusNote?: string;
-  /** Leave empty/undefined to hide the button instead of guessing a URL. */
   githubUrl?: string;
   liveUrl?: string;
-  /** A short accent word used in the project's visual treatment, e.g. "reps", "orders". */
   motif: string;
 }
 
@@ -41,7 +28,6 @@ export interface Experience {
   summary: string;
   highlights: string[];
   stack?: string[];
-  /** Controls visual weight in the timeline: 'lg' | 'md' | 'sm'. */
   emphasis: 'lg' | 'md' | 'sm';
 }
 

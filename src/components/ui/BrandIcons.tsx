@@ -1,11 +1,5 @@
 import type { SVGProps } from 'react';
 
-/**
- * Lightweight local brand marks. Newer lucide-react releases dropped
- * brand/logo icons, so these two are defined directly instead of pulling
- * in an extra icon package for just two glyphs.
- */
-
 export function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
