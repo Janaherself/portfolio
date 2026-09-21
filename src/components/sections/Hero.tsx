@@ -113,17 +113,19 @@ export function Hero() {
       <div className="flex-1">
         <p className="mb-4 flex items-center gap-2 font-mono text-sm font-medium" style={{ color: 'var(--accent)' }}>
           <Coffee className="h-4 w-4" aria-hidden="true" />
-          {personal.role.toLowerCase()} · probably on her second coffee
+          {personal.role.toLowerCase()} · coffee addict
         </p>
 
         <h1 className="font-display text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
-          {personal.name} asks{' '}
-          <span style={{ color: 'var(--accent)' }}>&ldquo;wait, why?&rdquo;</span> — then makes it work.
+          {personal.name} keeps asking{' '}
+          <span style={{ color: 'var(--accent)' }}>&ldquo;wait, why?&rdquo;</span>,  till it works.
         </h1>
 
         <p className="mt-6 max-w-xl text-lg leading-relaxed sm:text-xl" style={{ color: 'var(--ink-soft)' }}>
-          {personal.tagline} I build full-stack software with a backend-leaning brain, and I care more about
-          understanding a problem than about looking busy solving it.
+          {personal.tagline} 
+            <span className="block">I build full-stack software with a backend-leaning brain,
+              and I care more about understanding a problem than about looking busy solving it.
+            </span>
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
