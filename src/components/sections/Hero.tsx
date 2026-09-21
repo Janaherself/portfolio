@@ -113,7 +113,7 @@ export function Hero() {
       <div className="flex-1">
         <p className="mb-4 flex items-center gap-2 font-mono text-sm font-medium" style={{ color: 'var(--accent)' }}>
           <Coffee className="h-4 w-4" aria-hidden="true" />
-          {personal.role.toLowerCase()} · coffee addict
+          {personal.role.toLowerCase()} · problem solver
         </p>
 
         <h1 className="font-display text-4xl font-semibold leading-[1.1] sm:text-5xl lg:text-6xl">
