@@ -6,8 +6,8 @@ import { MysteryTrigger } from '../curiosity/MysteryTrigger';
 
 const LOG_LINES = [
   { prefix: '$', text: 'everything worked fine, only a tiny bug annoyed me' },
-  { prefix: '>', text: 'nobody asked me to fix it. I investigated anyway' },
-  { prefix: '>', text: 'learnt something new. fixed it (couldn\'t unsee it)' },
+  { prefix: '>', text: 'nobody asked me to fix it. investigated anyway' },
+  { prefix: '>', text: 'learnt something new. owned it. fixed it!' },
   { prefix: '$', text: 'status: curious, caffeinated, shippinggg!!' },
 ];
 
