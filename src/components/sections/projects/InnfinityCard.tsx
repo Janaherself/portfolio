@@ -4,10 +4,6 @@ import { ProjectLinks, StatusBadge, TechTags } from './ProjectBits';
 
 const LAYERS = ['Controllers', 'Services', 'Repositories', 'SQL Server'];
 
-/**
- * Innfinity's visual identity: a clean layered-architecture diagram,
- * matching a project that's explicitly about maintainable structure.
- */
 export function InnfinityCard({ project }: { project: Project }) {
   return (
     <article
@@ -29,7 +25,7 @@ export function InnfinityCard({ project }: { project: Project }) {
           {project.contribution}
           <CuriosityNote
             label="Why bother with this much structure for a side project?"
-            note="Because the discipline is the point. Logging, validation, and tests are easy to skip on a personal project — I wanted proof I won't skip them on a real one."
+            note="Because the discipline is the point. Logging, validation, and tests are easy to skip on a personal project, I wanted to practice them properly."
             className="mt-0.5"
           />
         </p>
@@ -39,7 +35,6 @@ export function InnfinityCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Layered architecture diagram */}
       <div
         className="flex flex-col justify-center gap-2.5 rounded-lg border p-6"
         style={{ borderColor: 'var(--border-strong)', background: 'var(--bg-sunken)' }}

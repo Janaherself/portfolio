@@ -16,7 +16,7 @@ export function Projects() {
       id="work"
       eyebrow="Selected work"
       title="Three problems I decided to solve myself"
-      description="Personal projects, each one built to get better at a specific thing — a real workflow, a full-stack build, a properly-structured backend."
+      description="Personal projects, each one built to get better at a specific thing, a real workflow, a full-stack build, a properly-structured backend."
     >
       <div className="flex flex-col gap-8">
         {projects.map((project) => {

@@ -4,10 +4,6 @@ import { ProjectLinks, StatusBadge, TechTags } from './ProjectBits';
 
 const WORKFLOW_ITEMS = ['Membership tracking', 'Class scheduling', 'Check-ins', 'Attendance history'];
 
-/**
- * Aqwa's visual identity: a whiteboard-and-checklist look, echoing the
- * manual, whiteboard-driven process it's meant to replace.
- */
 export function AqwaCard({ project }: { project: Project }) {
   return (
     <article
@@ -29,7 +25,7 @@ export function AqwaCard({ project }: { project: Project }) {
           {project.contribution}
           <CuriosityNote
             label="Why start from a real gym's whiteboard?"
-            note="I'm a member there. I watched the front desk juggle a paper sign-in sheet and a whiteboard class schedule and thought: this is a solvable problem."
+            note="I'm a member there. I watched the front desk juggle a paper sign-in sheet and full stacks of members records and thought: this is a problem I could solve!"
             className="mt-0.5"
           />
         </p>
@@ -39,7 +35,6 @@ export function AqwaCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Whiteboard / checklist visual */}
       <div
         className="relative flex flex-col justify-between rounded-lg border p-5"
         style={{
