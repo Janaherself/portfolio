@@ -7,7 +7,6 @@ export function CuriosityMeter() {
   const [pulsing, setPulsing] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
 
-  // Flash briefly every time a new curiosity is found.
   useEffect(() => {
     if (pulseKey === 0) return;
     setPulsing(true);
@@ -15,8 +14,6 @@ export function CuriosityMeter() {
     return () => window.clearTimeout(timeout);
   }, [pulseKey]);
 
-  // A quiet, dismissible "there's a game here" toast a few seconds after
-  // first load — never blocks the page, never shows again once dismissed.
   useEffect(() => {
     if (hasSeenIntro) return;
     const timeout = window.setTimeout(() => setShowIntro(true), 2600);
@@ -39,8 +36,8 @@ export function CuriosityMeter() {
         onClick={handleClick}
         aria-label={
           isComplete
-            ? `All ${total} curiosities found — click to reopen the celebration`
-            : `${foundCount} of ${total} curiosities found — click to learn about the game`
+            ? `All ${total} curiosities found, click to reopen the celebration`
+            : `${foundCount} of ${total} curiosities found, click to learn about the game`
         }
         className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs font-semibold transition-transform"
         style={{
@@ -65,8 +62,8 @@ export function CuriosityMeter() {
             Curious about the curiosities?
           </p>
           <p>
-            There are {total} small discoveries hiding around this site — some obvious, some not. Find all of them
-            and I'll have something for you.
+            There are {total} small mysteries hiding around this site, some obvious, some not. Find all of them
+            and I'll have something for you 👀
           </p>
           <button
             type="button"

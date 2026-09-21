@@ -11,7 +11,6 @@ export function CompletionModal() {
   const isOpen = celebration !== 'none';
   const isFullCelebration = celebration === 'full';
 
-  // Focus trap + Escape-to-close + restore focus on close + lock background scroll.
   useEffect(() => {
     if (!isOpen) return;
 
@@ -66,7 +65,6 @@ export function CompletionModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop — disables everything behind the modal */}
       <div
         className="absolute inset-0"
         style={{ background: 'color-mix(in srgb, black 55%, transparent)' }}
@@ -86,22 +84,29 @@ export function CompletionModal() {
         {isFullCelebration && !reducedMotion && <Confetti />}
 
         <h2 id="celebration-heading" className="font-display text-2xl font-semibold sm:text-3xl">
-          {isFullCelebration ? 'Congrats 🎉' : 'Welcome back 🎉'}
+          Congrats 🎉
         </h2>
 
         {isFullCelebration ? (
-          <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-            You passed the curiosity test!! Thank you for the time you wast… I mean spent in getting to know me!
-          </p>
+          <span>
+            <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              You passed the curiosity test!! Thank you for the time you wast… I mean spent in getting to know me!
+            </p>
+            
+            <p className="mt-4 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              Now you got me curious about you, let's have a {quickCallLink} and get to know all about you too!!
+            </p>
+          </span>
         ) : (
-          <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-            You already found all {total} — here's that invite again.
-          </p>
+          <span>
+            <p className="mt-3 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              You already found all {total} mysteries!
+            </p>
+            <p className="mt-4 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              just so you know, that {quickCallLink} invitation is still valid 👀
+            </p>
+          </span>
         )}
-
-        <p className="mt-4 leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-          Now you got me curious about you — let's have a {quickCallLink} and get to know all about you too.
-        </p>
 
         <button
           type="button"
