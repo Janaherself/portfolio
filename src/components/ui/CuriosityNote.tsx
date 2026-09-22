@@ -1,24 +1,11 @@
 import { useEffect, useId, useRef, useState } from 'react';
 
 interface CuriosityNoteProps {
-  /** The little aside revealed on interaction. Keep it short. */
   note: string;
-  /** Accessible label for the trigger, e.g. "Why ASP.NET Core?" */
   label: string;
   className?: string;
 }
 
-/**
- * A small "?" affordance that reveals a short aside — the site's main
- * "reward exploration without hiding important information" device.
- * Nothing essential is ever placed inside one of these; they're always
- * a bonus, never a requirement to understand the page.
- *
- * Hover/focus previews the note; a click or tap pins it open so touch
- * users (who have no hover state) can read it too. Clicking is
- * deliberately not a toggle against hover — otherwise a mouse user who
- * hovers, then clicks to "pin" it, would immediately close it again.
- */
 export function CuriosityNote({ note, label, className = '' }: CuriosityNoteProps) {
   const [hovering, setHovering] = useState(false);
   const [pinned, setPinned] = useState(false);
@@ -26,7 +13,6 @@ export function CuriosityNote({ note, label, className = '' }: CuriosityNoteProp
   const noteId = useId();
   const open = hovering || pinned;
 
-  // Clicking outside, or pressing Escape, un-pins the note.
   useEffect(() => {
     if (!pinned) return;
 
@@ -68,17 +54,11 @@ export function CuriosityNote({ note, label, className = '' }: CuriosityNoteProp
       >
         ?
       </button>
-      {/*
-        Positioned with a physical `left` + `-translate-x-1/2` centering
-        trick rather than logical `start`. Combining a logical inset with a
-        physical transform fights itself under `dir="rtl"`. If this site is
-        ever translated to Arabic, recompute this as a proper RTL-aware
-        popover position instead of reusing this CSS-only centering trick.
-      */}
+
       <span
         id={noteId}
         role="note"
-        className="absolute left-1/2 top-full z-20 mt-2 w-56 max-w-[80vw] -translate-x-1/2 rounded-md border p-3 text-xs leading-relaxed shadow-lg transition-all duration-200"
+        className="absolute left-1/2 top-full z-20 mt-2 w-64 max-w-[80vw] -translate-x-1/2 rounded-md border p-3 text-xs leading-relaxed shadow-lg transition-all duration-200"
         style={{
           background: 'var(--bg-raised)',
           borderColor: 'var(--border)',
@@ -89,6 +69,9 @@ export function CuriosityNote({ note, label, className = '' }: CuriosityNoteProp
           boxShadow: '0 10px 30px -12px hsl(var(--shadow-color) / 0.35)',
         }}
       >
+        <span className="mb-1.5 block font-semibold" style={{ color: 'var(--ink)' }}>
+          {label}
+        </span>
         {note}
       </span>
     </span>

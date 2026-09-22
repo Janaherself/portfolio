@@ -1,92 +1,74 @@
-# Jana — Personal Portfolio
+# ☕ Jana — Personal Portfolio
 
-A single-page developer portfolio built with React, TypeScript, Vite, and Tailwind CSS.
+A single-page developer portfolio that asks "wait, why?" a few too many times, then goes and builds the answer.
 
-## Stack
+No templated hero, no three identical project cards, no gradient soup — just a small, carefully-made corner of the internet built with React, TypeScript, and a genuine love of figuring out how things work.
 
-- **React 19 + TypeScript** — components and typed content
-- **Vite** — dev server and production build
-- **Tailwind CSS v4** — styling, via `@tailwindcss/vite`
-- **lucide-react** — icons (plus two local brand icons for GitHub/LinkedIn, see below)
+There's also a small hidden game built into the site. More on that below — with a spoiler warning, because half the fun is not knowing.
 
-No backend, no database, no paid services.
+---
 
-## Getting started
+## What's in here
 
-```bash
-npm install
-npm run dev       # local dev server
-npm run build     # production build → dist/
-npm run preview   # preview the production build locally
-```
+- **A hero** that opens with a typed terminal log instead of "Hi, I'm Jana"
+- **Three project case studies** — Aqwa, Sorpresa, Innfinity — each with its own visual identity instead of three identical cards
+- **An experience timeline**, weighted by how much there is to say, not just chronology
+- **A full light/dark theme**, hand-designed for both, not just one palette with the colors flipped
+- **A tiny hidden curiosity game** scattered across the site — five things to find, and something waiting on the other side of finding all of them
 
-## Editing your content
+## Built with
 
-All the actual words on the site live in `src/data/`, separate from the components that render them:
+- **React 19 + TypeScript**
+- **Vite**
+- **Tailwind CSS v4**
+- **lucide-react** for icons
 
-| File | What it controls |
+No backend, no database, no paid services, no heavy UI kit doing the design thinking on my behalf.
+
+---
+
+## 🕵️ The curiosity game
+
+There are **5 small discoveries** hidden around this site — some obvious once you know to look, some genuinely sneaky. Keep an eye on the little counter in the header (✦ `0/5`) — it'll fill in as you find things, and it'll nudge you once, gently, in case you missed that this was a thing at all.
+
+Find something, and it flies up to the counter like a coin pickup. Find all five, and something a little more celebratory happens — I promise it's worth the hunt.
+
+<details>
+<summary><strong>🚨 Spoiler alert — click only if you'd rather have the answer key than the fun</strong></summary>
+
+Seriously, consider not clicking this. It's five things, it'll take you a couple of minutes, and finding them yourself is the entire point.
+
+Still here? Fine. Here's where they are:
+
+| # | Where to look |
 |---|---|
-| `src/data/personal.ts` | Name, hero tagline, About paragraphs, social/contact links |
-| `src/data/projects.ts` | Aqwa, Sorpresa, Innfinity — description, stack, links, status |
-| `src/data/experience.ts` | Capital Placement, FTS, GSG entries |
-| `src/data/skills.ts` | Skill groups and the "how I work" rules |
+| 1 | Somewhere in the "about" section, there's a coffee pot. It doesn't just sit there. |
+| 2 | The logo in the header does more than take you back to the top — if you're persistent about it. |
+| 3 | That terminal-style log near the top of the page isn't purely decorative. |
+| 4 | One specific skill, among many listed, has more going on than the others. |
+| 5 | Read all the way to the very last character of the page. |
 
-**To add your links:** open `src/data/personal.ts` and fill in the empty `url` fields in `socialLinks` (GitHub, LinkedIn, CV, email). Any link left blank is automatically hidden — you never end up with a dead button.
+</details>
 
-**To add a project's GitHub/live link:** open `src/data/projects.ts` and fill in `githubUrl` / `liveUrl` for that project. Leave either blank to hide just that button.
+---
 
-## Project structure
+## Want to fork this and make it yours?
 
-```
-src/
-  components/
-    sections/       Hero, Projects, Experience, Skills, About (one file per section)
-    sections/projects/  the three distinct project card layouts
-    ui/             small reusable pieces (Section wrapper, ThemeToggle, CuriosityNote, icons)
-  data/             typed content — see table above
-  hooks/            useTheme (light/dark), useReducedMotion
-```
+Go for it. The whole point of keeping content separate from components was so someone else could do exactly this!!
 
-## Theme system
+Quick tour: clone it, `npm install`, `npm run dev` to see it locally. Every word on the site — your name, your projects, your experience, your links, even the hidden game's trivia — lives in `src/data/`, not scattered through the JSX, so swapping in your own story doesn't mean touching component code. Update everything in there, and it's yours. When you're ready, it deploys to Vercel's free tier in a few clicks — connect the repo, accept the defaults, done.
 
-Light/dark mode is handled by:
+---
 
-- An inline script in `index.html` that sets `data-theme` on `<html>` before React loads, so there's no flash of the wrong theme.
-- `src/hooks/useTheme.tsx`, which persists the choice to `localStorage` (`jana-theme`) and falls back to the OS preference if nothing is saved.
-- CSS custom properties in `src/index.css` (`--bg`, `--ink`, `--accent`, etc.) — both themes are hand-tuned, not a simple color inversion.
+## Notes on craft
 
-## Notes on accessibility
+A few things I cared about that don't always make it into a portfolio README:
 
-- Verified with an automated axe-core scan (0 violations) and manual checks: heading order (h1→h2→h3, no skips), full keyboard navigation with visible focus rings, a skip-to-content link, `prefers-reduced-motion` support, and no horizontal overflow from 320px up.
-- Layout uses CSS logical properties (`ps-`, `start-`, `inset-inline-start`) in layout-critical spots (nav skip link, experience timeline) so the structure stays sound if the site is ever translated to a right-to-left language. One small decorative element (the "curiosity note" tooltip position) intentionally still uses a physical offset — see the comment in `src/components/ui/CuriosityNote.tsx` if you ever add Arabic content and want to revisit it.
+- **Accessible by default** — verified with an automated accessibility scan (zero violations, light and dark mode alike), full keyboard navigation with visible focus states, a skip-to-content link, and respect for reduced-motion preferences throughout.
+- **No horizontal scrollbars, ever** — tested from a 320px-wide phone screen up to a full desktop.
+- **RTL-ready structure** — the layout is built with logical CSS properties in the places that matter, so it wouldn't fall apart if this ever needed to run right-to-left.
+- **Every animation is optional** — anyone with reduced-motion turned on gets the same information, just without the flourish.
 
-## Deploying to Vercel (free Hobby plan)
+---
 
-This repo is a standard Vite static build, so Vercel needs almost no configuration — `vercel.json` is already in the repo with the right build command and output directory.
-
-1. Push this project to a GitHub repository (see below if it isn't one yet).
-2. Go to [vercel.com](https://vercel.com) and sign up/log in with your GitHub account — no credit card required for the Hobby plan.
-3. Click **Add New → Project**, and select your portfolio repo.
-4. Vercel will auto-detect it as a Vite project. Leave the defaults (`npm run build`, output directory `dist`).
-5. Click **Deploy**. You'll get a free `your-project.vercel.app` URL a minute or two later.
-6. Any future `git push` to your main branch redeploys automatically.
-
-### If you haven't pushed to GitHub yet
-
-```bash
-git init
-git add .
-git commit -m "Initial portfolio"
-git branch -M main
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin main
-```
-
-### Alternative free hosts
-
-If Vercel isn't available to you, this is a plain static build, so the same `dist/` output deploys unchanged to:
-
-- **Cloudflare Pages** — build command `npm run build`, output directory `dist`.
-- **Render Static Sites** — same build command and output directory.
-
-No code changes are needed to switch.
+Built by Jana, fueled by coffee, and mildly obsessed with asking "but why does it do that?" one more time than is strictly necessary.
